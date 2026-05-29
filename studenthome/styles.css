@@ -129,3 +129,20 @@ body {
 
 
 .icon-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+/* main dashboard */
+
+.dashboard {
+    flex: 1;
+    padding: 28px;
+    max-width: calc(var(--container-w) + 56px);
+    margin: 0 auto;
+    width: 100%;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 22px;
+  align-items: start;
+}
