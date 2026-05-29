@@ -1,0 +1,131 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* colors */
+
+:root {
+  --maroon:      #7a0019;
+  --rivers-logo: #c20430;
+  --deep-red:    #531017;
+  --gold:        #c9974a;
+  --muted:       #f6f4f1;
+  --surface:     #ffffff;
+  --text:        #222222;
+  --muted-text:  #5b5b5b;
+  --danger:      #c23b3b;
+  --shadow:      rgba(18,18,18,0.08);
+  --radius:      10px;
+  --container-w: 980px;
+}
+
+html { font-size: 16px; }
+
+
+body {
+  font-family: "Manrope", sans-serif;
+  background: var(--muted);
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+
+.shell { min-height: 100vh; display: flex; flex-direction: column; }
+.main  { flex: 1; display: flex; flex-direction: column; }
+
+/* top bar */
+
+.topbar {
+  background: var(--maroon);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 0 28px;
+}
+
+
+.topbar-inner {
+  max-width: calc(var(--container-w) + 56px);
+  margin: 0 auto;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* rivers logo and name inside topbar */
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+
+.topbar-brand img {
+  height: auto;
+  width: 150px;
+  object-fit: contain;
+}
+
+
+.topbar-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+
+.topbar-brand-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+
+.topbar-brand-sub {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* divider between logo and title */
+
+.topbar-brand::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.2);
+  margin-left: 14px;
+}
+
+
+.topbar-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  flex: 1;
+}
+
+
+.topbar-actions { display: flex; align-items: center; gap: 4px; }
+
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+
+.icon-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
