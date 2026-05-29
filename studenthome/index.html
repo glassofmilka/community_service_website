@@ -1,133 +1,230 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Community Service Hours Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Service Hours Tracker | The Rivers School</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <img src="https://bbk12e1-cdn.myschoolcdn.com/ftpimages/54/logo/TRS.png" alt="Logo" class="logo" onerror="this.style.display='none'">
-      <h1>Community Service Hours Tracker</h1>
-      <p class="tag">Keep track of your volunteer work</p>
+<div class="shell">
+
+  <main class="main">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-brand">
+          <img
+            src="https://bbk12e1-cdn.myschoolcdn.com/ftpimages/54/logo/TRS.png"
+            alt="The Rivers School"
+            onerror="this.style.display='none'"
+          />
+          <div class="topbar-brand-text">
+            <span class="topbar-brand-name">CivicTrack</span>
+            <span class="topbar-brand-sub">Community Service Hub</span>
+          </div>
+        </div>
+        <span class="topbar-title">Community Service Hours Tracker</span>
+        <div class="topbar-actions">
+          <button class="icon-btn" title="Notifications">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button class="icon-btn" title="Account">
+            <span class="material-symbols-outlined">person</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+      <div class="dashboard-grid">
+
+        <!-- Left Column -->
+        <div class="left-col">
+
+          <!-- Stats Card -->
+          <div class="card">
+            <div class="card-body">
+              <div class="stats-header">
+                <div>
+                  <div class="stats-label">Total Hours Logged</div>
+                  <div id="totalHours" class="stats-number">0.00</div>
+                </div>
+                <div class="stats-icon">
+                  <span class="material-symbols-outlined">timer</span>
+                </div>
+              </div>
+              <div class="progress-meta">
+                <span>Goal: <strong id="goalDisplay">30.00</strong> hours</span>
+                <span class="progress-pct" id="progressPercent">0%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width:0%"></div>
+              </div>
+              <p class="progress-caption" id="progressCaption">0% of your goal completed</p>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="card">
+            <div class="card-body">
+              <div class="section-title-sm">Quick Actions</div>
+              <button id="exportBtn" class="action-btn">
+                <div class="action-btn-left">
+                  <span class="action-icon material-symbols-outlined">download</span>
+                  Export CSV Report
+                </div>
+                <span class="chevron material-symbols-outlined">chevron_right</span>
+              </button>
+              <button id="clearBtn" class="action-btn danger">
+                <div class="action-btn-left">
+                  <span class="action-icon danger material-symbols-outlined">delete_sweep</span>
+                  Clear All Entries
+                </div>
+                <span class="chevron material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+
+          <!-- Log Hours Form -->
+          <div class="card">
+            <div class="form-section-header">
+              <span class="form-section-icon material-symbols-outlined">add_circle</span>
+              <h2 class="form-section-title">Log New Service Hours</h2>
+            </div>
+            <form id="entryForm" autocomplete="off">
+              <div class="form-row">
+                <div class="field">
+                  <label for="date">Date <span class="req">*</span></label>
+                  <input type="date" id="date" required />
+                </div>
+                <div class="field">
+                  <label for="org">Organization <span class="req">*</span></label>
+                  <input type="text" id="org" placeholder="e.g. Red Cross" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="cause">Cause / Impact Population <span class="req">*</span></label>
+                  <select id="cause" required>
+                    <option value="" disabled selected>Select a cause…</option>
+                    <option value="Advocacy">Advocacy, Activism &amp; Community Organizing</option>
+                    <option value="Elderly">Aging / Elderly</option>
+                    <option value="Animal">Animal (e.g. shelters)</option>
+                    <option value="Disability">Disability Awareness and Programming</option>
+                    <option value="Environmental">Environmental (e.g. farming, trails)</option>
+                    <option value="Health">Health and Wellness</option>
+                    <option value="Housing/Food">Housing &amp; Food Insecurities</option>
+                    <option value="Immigration">Immigration &amp; English Language Learners</option>
+                    <option value="Incarcerated">Incarcerated Adults or Youth</option>
+                    <option value="Philanthropy">Philanthropy and Fundraising</option>
+                    <option value="Red Key">Red Key (Max 10 hours for grad)</option>
+                    <option value="Youth-Social">Youth Social Emotional (Mentoring/Camps)</option>
+                    <option value="Youth-Academic">Youth Academic (Tutoring)</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="hours">Hours <span class="req">*</span></label>
+                  <input type="number" id="hours" step="any" placeholder="0.00" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field full">
+                  <label for="desc">Description <span class="req">*</span></label>
+                  <textarea id="desc" placeholder="Briefly describe your responsibilities and impact…"></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field full">
+                  <label for="contact">Organizer Contact Info</label>
+                  <input type="text" id="contact" placeholder="Name, Email, or Phone Number" />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" id="addBtn" class="btn-primary">
+                  <span class="material-symbols-outlined" style="font-size:1rem;">add</span>
+                  Add Entry
+                </button>
+                <button type="reset" class="btn-ghost">Clear Form</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Entries Table -->
+          <div class="card">
+            <div class="table-header">
+              <h3 class="table-section-title">Entries (Stacked by Organization)</h3>
+              <div class="filter-bar">
+                <div class="filter-wrap">
+                  <span class="search-icon material-symbols-outlined">search</span>
+                  <input type="text" id="filterOrg" placeholder="Filter by org…" />
+                </div>
+                <button id="applyFilter" class="btn-primary btn-sm">Apply</button>
+                <button id="clearFilter" class="btn-ghost btn-sm">Clear</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="entriesTable">
+                <thead>
+                  <tr>
+                    <th>Date(s)</th>
+                    <th>Organization</th>
+                    <th>Cause</th>
+                    <th>Description</th>
+                    <th>Total Hours</th>
+                    <th>Contact</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="entriesBody">
+                  <tr id="emptyState">
+                    <td colspan="7">
+                      <div class="empty-state">
+                        <span class="empty-icon material-symbols-outlined">inventory_2</span>
+                        <p>No service hours logged yet. Start by adding an entry above.</p>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
-  </header>
 
-  <main class="container">
-    <section class="tracker">
-      <form id="entryForm" class="entry-form" autocomplete="off">
-        <div class="row">
-          <label>
-            Date
-            <input type="date" id="date" required />
-          </label>
-          <label>
-            Organization
-            <input type="text" id="org" placeholder="e.g., Food Bank" required />
-          </label>
-          <label>
-  Impact Population / Cause
-  <select id="cause" required>
-    <option value="" disabled selected>Select a cause...</option>
-    <option value="Advocacy">Advocacy, Activism & Community Organizing</option>
-    <option value="Elderly">Aging/Elderly</option>
-    <option value="Animal">Animal (Ex: shelters)</option>
-    <option value="Disability">Disability Awareness and Programming</option>
-    <option value="Environmental">Environmental (Ex: farming, trails)</option>
-    <option value="Health">Health and Wellness</option>
-    <option value="Housing/Food">Housing & Food Insecurities</option>
-    <option value="Immigration">Immigration & English Language Learners</option>
-    <option value="Incarcerated">Incarcerated Adults or Youth</option>
-    <option value="Philanthropy">Philanthropy and Fundraising</option>
-    <option value="Red Key">Red Key (Max 10 hours for grad)</option>
-    <option value="Youth-Social">Youth Social Emotional (Mentoring/Camps)</option>
-    <option value="Youth-Academic">Youth Academic (Tutoring)</option>
-    <option value="Other">Other</option>
-  </select>
-</label>
-        </div>
-
-        <div class="row">
-          <label>
-            Hours
-            <input type="number" id="hours" min="0.1" step="0.1" placeholder="1.5" required />
-          </label>
-          <label>
-            Description
-            <input type="text" id="desc" placeholder="What you did" />
-          </label>
-          <label>
-            Organizer Contact
-            <input type="text" id="contact" placeholder="Email or Phone">
-          </label>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" id="addBtn" class="btn primary">Add entry</button>
-          <button type="button" id="clearBtn" class="btn ghost">Clear all</button>
-          <button type="button" id="exportBtn" class="btn ghost">Export CSV</button>
-        </div>
-      </form>
-
-      <div class="summary">
-        <div class="summary-row">
-          <div>
-            <h3>Total hours</h3>
-            <div id="totalHours" class="big-number">0.00</div>
-          </div>
-          <div>
-            <h3>Goal (hours)</h3>
-            <div id="goalDisplay" class="big-number">30</div>
-          </div>
-        </div>
-
-        <div class="progress-wrap">
-          <div id="progressBar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div id="progressFill" class="progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="progress-text"><span id="progressPercent">0%</span> of your goal</div>
-        </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span class="footer-copy">&copy; 2025 The Rivers School &mdash; CivicTrack</span>
+        <nav class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Support</a>
+        </nav>
       </div>
-    </section>
+    </footer>
 
-    <section class="list-section">
-      <h2>Entries (Stacked by Organization)</h2>
-      <div class="table-wrap">
-        <table id="entriesTable" class="entries-table">
-          <thead>
-            <tr>
-              <th>Date(s)</th>
-              <th>Organization</th>
-              <th>Cause</th>
-              <th>Description</th>
-              <th>Total Hours</th>
-              <th>Contact</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="entriesBody"></tbody>
-        </table>
-      </div>
-
-      <div class="controls">
-        <label>
-          Filter by org:
-          <input id="filterOrg" type="text" placeholder="Type to filter..." />
-        </label>
-        <button id="applyFilter" class="btn ghost">Apply</button>
-        <button id="clearFilter" class="btn ghost">Clear</button>
-      </div>
-    </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; Community Service Tracker</p>
-    </div>
-  </footer>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
